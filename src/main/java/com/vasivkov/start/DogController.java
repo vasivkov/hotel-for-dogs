@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class DogController {
     @Autowired
@@ -21,7 +23,9 @@ public class DogController {
     @PostMapping(value = "/dog")
     public Dog add(@RequestParam String name, @RequestParam int weight) {
         Dog dog = new Dog(name, weight);
-        dogRepos.save(dog);
+        if(!dogRepos.findByNameAndWeight(name, weight).equals(dog)) {
+            dogRepos.save(dog);
+        }
         Iterable<Dog> dogs = dogRepos.findAll();
         return dog;
     }
@@ -39,6 +43,16 @@ public class DogController {
         dogRepos.delete(dog);
         return ResponseEntity.ok().build();
     }
+    @PutMapping("dog/change/{dogsId}")
+    public Dog changeDog (@PathVariable int dogsId, @RequestParam String name, @RequestParam int weight) throws DogNotFoundException {
+        Dog dog = dogRepos.findById(dogsId).orElseThrow(() -> new DogNotFoundException(dogsId));
+        dog.setName(name);
+        dog.setWeight(weight);
+        dogRepos.save(dog);
+
+        return dog;
+    }
 
 
 }
+
