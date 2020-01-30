@@ -1,8 +1,36 @@
 package com.vasivkov.start.domain;
 
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "owner")
 public class Owner {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
     private String LastName;
+
+    public Set<Dog> getDogs() {
+        return dogs;
+    }
+
+    public void setDogs(Set<Dog> dogs) {
+        this.dogs = dogs;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner",cascade = CascadeType.ALL)
+    private Set<Dog> dogs;
 
     public Owner() {
     }

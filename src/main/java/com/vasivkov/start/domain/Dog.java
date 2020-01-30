@@ -1,9 +1,6 @@
 package com.vasivkov.start.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Dog {
@@ -15,7 +12,9 @@ public class Dog {
 
     private int weight;
 
-//    private Owner owner;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private Owner owner;
 
     public Dog() {
     }
@@ -49,11 +48,11 @@ public class Dog {
         this.weight = weight;
     }
 
-//    public Owner getOwner() {
-//        return owner;
-//    }
-//
-//    public void setOwner(Owner owner) {
-//        this.owner = owner;
-//    }
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 }
