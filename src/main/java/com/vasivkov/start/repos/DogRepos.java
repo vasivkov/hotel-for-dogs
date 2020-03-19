@@ -8,4 +8,6 @@ import java.util.Set;
 public interface DogRepos extends CrudRepository<Dog, Integer> {
     Set<Dog> findByOwnerId(int ownerId);
     Optional<Dog> findByIdAndOwnerId(int id, int instructorId);
+
+
 }

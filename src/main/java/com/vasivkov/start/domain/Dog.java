@@ -13,7 +13,7 @@ public class Dog {
     private int weight;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "owner-id")
     private Owner owner;
 
     public Dog() {

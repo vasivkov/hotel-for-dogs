@@ -3,12 +3,14 @@ package com.vasivkov.start.domain;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "owner")
 public class Owner {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String LastName;
@@ -39,6 +41,7 @@ public class Owner {
         this.name = name;
         LastName = lastName;
     }
+
 
     public String getName() {
         return name;
