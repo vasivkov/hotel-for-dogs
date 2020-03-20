@@ -22,7 +22,7 @@ public class DogController {
 
     @PostMapping(value = "/dog")
     public Dog add(@RequestParam String name, @RequestParam int weight) {
-        Dog dog = new Dog(name, weight);
+        Dog dog = new Dog();
 
         Iterable<Dog> dogs = dogRepos.findAll();
         return dog;

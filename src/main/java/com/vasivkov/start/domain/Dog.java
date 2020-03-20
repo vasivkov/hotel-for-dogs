@@ -9,31 +9,14 @@ public class Dog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String name;
-
     private Integer weight;
-
-    public Date getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner")
     private Owner owner;
-
     private Date created_at;
 
     public Dog() {
-    }
-
-    public Dog(String name, int weight) {
-        this.name = name;
-        this.weight = weight;
     }
 
     public Integer getId() {
@@ -52,11 +35,11 @@ public class Dog {
         this.name = name;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 
@@ -66,5 +49,13 @@ public class Dog {
 
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 }
