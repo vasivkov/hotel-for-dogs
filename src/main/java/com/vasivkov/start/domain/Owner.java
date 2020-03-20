@@ -1,19 +1,31 @@
 package com.vasivkov.start.domain;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "owner")
+@Table(name = "owners")
 public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    private String LastName;
+    private String last_name;
+    private Date created_at;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner",cascade = CascadeType.ALL)
+    @Transient
+    private Set<Dog> dogs;
+
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
 
     public Set<Dog> getDogs() {
         return dogs;
@@ -31,15 +43,14 @@ public class Owner {
         this.id = id;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner",cascade = CascadeType.ALL)
-    private Set<Dog> dogs;
+
 
     public Owner() {
     }
 
-    public Owner(String name, String lastName) {
+    public Owner(String name, String lastname) {
         this.name = name;
-        LastName = lastName;
+        last_name = lastname;
     }
 
 
@@ -51,16 +62,16 @@ public class Owner {
         this.name = name;
     }
 
-    public String getLastName() {
-        return LastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        LastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     @Override
     public String toString() {
-        return LastName + " " + name;
+        return last_name + " " + name;
     }
 }

@@ -1,8 +1,10 @@
 package com.vasivkov.start.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
+@Table (name = "dogs")
 public class Dog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -10,11 +12,21 @@ public class Dog {
 
     private String name;
 
-    private int weight;
+    private Integer weight;
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner-id")
+    @JoinColumn(name = "owner_id")
     private Owner owner;
+
+    private Date created_at;
 
     public Dog() {
     }
