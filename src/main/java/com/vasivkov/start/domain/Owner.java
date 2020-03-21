@@ -3,7 +3,6 @@ package com.vasivkov.start.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +19,7 @@ public class Owner {
     private Integer id;
 
     private String name;
+
     private String last_name;
 
     @Column(name = "created_at")
