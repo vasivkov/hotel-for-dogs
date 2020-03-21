@@ -1,9 +1,14 @@
 package com.vasivkov.start.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "rooms")
 public class Room {
@@ -12,7 +17,7 @@ public class Room {
     private Integer id;
     private Float square;
     private Date created_at;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "room",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "room", cascade = CascadeType.ALL)
     private List<Reserve> reserves;
 
     public List<Reserve> getReserves() {
