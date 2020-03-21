@@ -2,7 +2,6 @@ package com.vasivkov.start.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -15,12 +14,17 @@ import java.util.List;
 @Entity
 @Table(name = "owners")
 public class Owner {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
     private String last_name;
-    private Date created_at;
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Dog> dogs;
 
@@ -28,5 +32,4 @@ public class Owner {
         this.name = name;
         this.last_name = last_name;
     }
-
 }

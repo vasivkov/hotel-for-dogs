@@ -14,12 +14,16 @@ import java.util.List;
 @Entity
 @Table(name = "rooms")
 public class Room {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private Float square;
-    private Date created_at;
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "room", cascade = CascadeType.ALL)
     private List<Reserve> reserves;
-
 }

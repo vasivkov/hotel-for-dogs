@@ -13,18 +13,26 @@ import java.util.Date;
 @Entity
 @Table(name = "reserves")
 public class Reserve {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room")
     private Room room;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dog")
     private Dog dog;
-    private Date date_start;
-    private Date date_finish;
-    private Date created_at;
 
+    @Column(name = "date_start")
+    private Date dateStart;
+
+    @Column(name = "date_finish")
+    private Date dateFinish;
+
+    @Column(name = "created_at")
+    private Date createdAt;
 }
 
