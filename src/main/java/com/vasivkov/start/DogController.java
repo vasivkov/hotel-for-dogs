@@ -22,10 +22,8 @@ public class DogController {
 
     @PostMapping(value = "/dog")
     public Dog add(@RequestParam String name, @RequestParam int weight) {
-        Dog dog = new Dog(name, weight);
-        if(!dogRepos.findByNameAndWeight(name, weight).equals(dog)) {
-            dogRepos.save(dog);
-        }
+        Dog dog = new Dog();
+
         Iterable<Dog> dogs = dogRepos.findAll();
         return dog;
     }

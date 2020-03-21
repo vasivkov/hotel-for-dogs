@@ -1,66 +1,35 @@
 package com.vasivkov.start.domain;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "owner")
+@Table(name = "owners")
 public class Owner {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
-    private String LastName;
 
-    public Set<Dog> getDogs() {
-        return dogs;
-    }
+    private String last_name;
 
-    public void setDogs(Set<Dog> dogs) {
-        this.dogs = dogs;
-    }
+    @Column(name = "created_at")
+    private Date createdAt;
 
-    public int getId() {
-        return id;
-    }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Dog> dogs;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner",cascade = CascadeType.ALL)
-    private Set<Dog> dogs;
-
-    public Owner() {
-    }
-
-    public Owner(String name, String lastName) {
+    public Owner(String name, String last_name) {
         this.name = name;
-        LastName = lastName;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String lastName) {
-        LastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return LastName + " " + name;
+        this.last_name = last_name;
     }
 }

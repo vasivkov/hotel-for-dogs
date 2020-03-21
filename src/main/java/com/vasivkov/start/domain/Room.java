@@ -1,6 +1,5 @@
 package com.vasivkov.start.domain;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,24 +11,18 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "dogs")
-public class Dog {
+@Table(name = "rooms")
+public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
-
-    private Integer weight;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner")
-    private Owner owner;
+    private Float square;
 
     @Column(name = "created_at")
     private Date createdAt;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dog", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "room", cascade = CascadeType.ALL)
     private List<Reserve> reserves;
 }
