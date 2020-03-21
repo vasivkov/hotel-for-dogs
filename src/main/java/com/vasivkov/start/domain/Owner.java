@@ -9,7 +9,7 @@ import java.util.Set;
 @Table(name = "owners")
 public class Owner {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String last_name;
