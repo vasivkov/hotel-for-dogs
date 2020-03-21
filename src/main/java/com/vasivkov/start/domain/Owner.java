@@ -1,13 +1,15 @@
 package com.vasivkov.start.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -21,9 +23,6 @@ public class Owner {
     private Date created_at;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Dog> dogs;
-
-    public Owner() {
-    }
 
     public Owner(String name, String last_name) {
         this.name = name;

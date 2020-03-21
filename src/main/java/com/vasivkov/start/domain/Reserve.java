@@ -1,11 +1,13 @@
 package com.vasivkov.start.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -23,9 +25,6 @@ public class Reserve {
     private Date date_start;
     private Date date_finish;
     private Date created_at;
-
-    public Reserve() {
-    }
 
 }
 
