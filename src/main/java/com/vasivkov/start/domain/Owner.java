@@ -14,7 +14,6 @@ public class Owner {
     private String name;
     private String last_name;
     private Date created_at;
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner",cascade = CascadeType.ALL)
     private List<Dog> dogs;
 

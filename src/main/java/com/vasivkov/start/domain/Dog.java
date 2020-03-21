@@ -2,6 +2,7 @@ package com.vasivkov.start.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table (name = "dogs")
@@ -15,8 +16,18 @@ public class Dog {
     @JoinColumn(name = "owner")
     private Owner owner;
     private Date created_at;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dog",cascade = CascadeType.ALL)
+    private List<Reserve> reserves;
 
     public Dog() {
+    }
+
+    public List<Reserve> getReserves() {
+        return reserves;
+    }
+
+    public void setReserves(List<Reserve> reserves) {
+        this.reserves = reserves;
     }
 
     public Integer getId() {

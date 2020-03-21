@@ -2,6 +2,7 @@ package com.vasivkov.start.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "rooms")
@@ -11,6 +12,16 @@ public class Room {
     private Integer id;
     private Float square;
     private Date created_at;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "room",cascade = CascadeType.ALL)
+    private List<Reserve> reserves;
+
+    public List<Reserve> getReserves() {
+        return reserves;
+    }
+
+    public void setReserves(List<Reserve> reserves) {
+        this.reserves = reserves;
+    }
 
     public Room() {
     }
