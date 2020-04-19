@@ -21,11 +21,5 @@ public interface RoomRepos extends JpaRepository<Room, Integer> {
     @Query("SELECT r FROM Room r WHERE square > :roomSquare")
     List<Room> findRoomsBySquare (Float roomSquare);
 
-    @Modifying
-    @Query(value = "INSERT INTO rooms (square, created_at) VALUES (:roomSquare, :roomCreatedAt)", nativeQuery = true)
-    @Transactional
-    void insertInRoom(@Param("roomSquare") Float square, @Param("roomCreatedAt")Date date);
-
-
 }
 

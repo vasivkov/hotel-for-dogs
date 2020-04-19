@@ -24,7 +24,7 @@ public class OwnerReposTest {
 
         List<Owner> all = ownerRepos.findAll();
         all.forEach(o -> {
-            System.out.println(o.getName() + " " + o.getLast_name());
+            System.out.println(o.getName() + " " + o.getLastName());
         });
     }
 

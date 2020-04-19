@@ -1,6 +1,5 @@
 package com.vasivkov.start.repos;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import com.vasivkov.start.domain.Room;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -9,7 +8,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
@@ -22,10 +23,14 @@ public class RoomReposTest {
 
     @Before
     public void fillWithData() {
-        roomRepos.insertInRoom(20F, new Date());
-        roomRepos.insertInRoom(13F, new Date());
-        roomRepos.insertInRoom(15F, new Date());
-
+        Room room = Room.builder().square(20F).createdAt(new Date()).build();
+        Room room2 = Room.builder().square(13F).createdAt(new Date()).build();
+        Room room3 = Room.builder().square(25F).createdAt(new Date()).build();
+        List<Room> rooms = new ArrayList<>();
+        rooms.add(room);
+        rooms.add(room2);
+        rooms.add(room3);
+        roomRepos.saveAll(rooms);
     }
 
     @Test
@@ -51,7 +56,7 @@ public class RoomReposTest {
         Room save = roomRepos.save(room);
         Optional<Float> result = roomRepos.findSquare(save.getId());
         Assert.assertTrue(result.isPresent());
-        Assert.assertEquals(22.0F, result.get().floatValue(), 0.01);
+        Assert.assertEquals(22.0F, result.get(), 0.01);
     }
 
     @Test
@@ -60,20 +65,13 @@ public class RoomReposTest {
     }
 
     @Test
-    @Ignore
-    public void test5(){
-        Assert.assertEquals(15F, roomRepos.findSquare(3).get(),0.01);
-
-    }
-
-    @Test
-    public void findBySquareTest(){
+    public void findBySquareTest() {
         Assert.assertEquals(2, roomRepos.findRoomsBySquare(14F).size());
         Assert.assertEquals(0, roomRepos.findRoomsBySquare(25F).size());
 
     }
 
-    @Ignore
+    @After
     public void emptyTable() {
         roomRepos.deleteAll();
     }
