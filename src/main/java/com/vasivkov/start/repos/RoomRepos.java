@@ -1,5 +1,6 @@
 package com.vasivkov.start.repos;
 
+import com.vasivkov.start.domain.Reserve;
 import com.vasivkov.start.domain.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,5 +22,7 @@ public interface RoomRepos extends JpaRepository<Room, Integer> {
     @Query("SELECT r FROM Room r WHERE square > :roomSquare")
     List<Room> findRoomsBySquare (Float roomSquare);
 
+    @Query("SELECT r.reserves FROM Room r WHERE id = :roomId" )
+    List<Reserve> findRoomReserves (int roomId);
 }
 

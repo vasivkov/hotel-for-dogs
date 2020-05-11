@@ -60,7 +60,7 @@ public class ReserveReposTest {
         Optional<Room> freeRooms = reserveRepos.findFreeRoom(testRoom.getId(),
                 new GregorianCalendar(2020, Calendar.APRIL, 29).getTime(),
                 new GregorianCalendar(2020, Calendar.MAY, 15).getTime());
-        Assert.assertTrue(freeRooms.isPresent());
+        Assert.assertFalse(freeRooms.isPresent());
     }
 
 
